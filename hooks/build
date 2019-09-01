@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 
 if [ "$DOCKER_TAG" = "latest" ]; then
-  docker build --platform linux/386 --build-arg VERSION_ARG="master" -t ${IMAGE_NAME} .
+  docker build --build-arg VERSION_ARG="master" -t ${IMAGE_NAME} .
 else
-  docker build --platform linux/386 --build-arg VERSION_ARG="$DOCKER_TAG" -t ${IMAGE_NAME} .
+  docker build --build-arg VERSION_ARG="$DOCKER_TAG" -t ${IMAGE_NAME} .
 fi
