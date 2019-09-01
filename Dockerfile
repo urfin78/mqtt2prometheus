@@ -21,4 +21,4 @@ COPY --from=gobuild /bin/mqtt2prometheus /mqtt2prometheus/mqtt2prometheus
 RUN chown -R ${UID}:${GID} /mqtt2prometheus
 USER ${UID}:${GID}
 EXPOSE 8002
-ENTRYPOINT ["linux32", "/mqtt2prometheus/mqtt2prometheus", "-config", "/mqtt2prometheus/config.yaml"]
+ENTRYPOINT ["/mqtt2prometheus/mqtt2prometheus", "-config", "/mqtt2prometheus/config.yaml"]
