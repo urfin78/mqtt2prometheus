@@ -1,8 +1,8 @@
 FROM i386/golang:1.12.9-buster as gobuild
-ARG VERSION_ARG
-ENV PROJECT_VERSION ${VERSION_ARG}
+ARG VERSION
 WORKDIR ${GOPATH}/src/github.com/hikhvar
-RUN git clone https://github.com/hikhvar/mqtt2prometheus.git --single-branch --branch ${PROJECT_VERSION} --depth=1
+RUN git clone https://github.com/hikhvar/mqtt2prometheus.git
+RUN if [ $VERSION != "master" ]; then git checkout tags/$VERSION; fi
 WORKDIR ${GOPATH}/src/github.com/hikhvar/mqtt2prometheus
 RUN make static_build TARGET_FILE=/bin/mqtt2prometheus
 FROM i386/debian:buster-slim
