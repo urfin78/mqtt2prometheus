@@ -1,5 +1,5 @@
 # mqtt2prometheus-docker-i386
-[![dockerhub build status](https://img.shields.io/docker/cloud/build/urfin78/mqtt2prometheus-i386.svg)](https://hub.docker.com/r/urfin78/mqtt2prometheus-i386/)
+![Docker image build and push](https://github.com/urfin78/mqtt2prometheus-docker-i386/workflows/Docker%20image%20build%20and%20push/badge.svg)
 
 Build mqtt2prometheus docker container for i386 systems
 
