@@ -1,0 +1,41 @@
+name: Docker image build and inspect
+
+on: 
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build_latest:
+    name: Build latest
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2.3.2
+
+    - name: Always build the latest Docker image
+      run: docker build --build-arg VERSION=master -t mqtt2prometheus:test-latest .
+
+    - name: Inspect build image
+      run: docker inspect mqtt2prometheus:test-latest
+ 
+  
+  build_version:
+    name: Build version
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2.3.2
+
+    - name: Get latest release
+      run: |
+        export RELEASE_LATEST=$(curl -s "https://api.github.com/repos/hikhvar/mqtt2prometheus/releases/latest" | grep -Po '"tag_name": "\K.*?(?=")')
+        echo "::set-env name=VERSION::$RELEASE_LATEST"
+      shell: bash
+
+    - name: Build the Docker image for last available version
+      run: docker build --build-arg VERSION=$VERSION -t mqtt2prometheus:test-$VERSION .
+
+    - name: Inspect build image
+      run: docker inspect mqtt2prometheus:test-$VERSION
+
