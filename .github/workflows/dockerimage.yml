@@ -57,13 +57,13 @@ jobs:
     - name: Get latest release
       run: |
         export RELEASE_LATEST=$(curl -s "https://api.github.com/repos/hikhvar/mqtt2prometheus/releases/latest" | grep -Po '"tag_name": "\K.*?(?=")')
-        echo "::set-env name=VERSION::$RELEASE_LATEST"
+        echo "VERSION=$RELEASE_LATEST" >> ${GITHUB_ENV}
       shell: bash
 
     - name: Compare release with already pushed version
       run: |
         export RELEASE_AVAIL=$(curl -s "https://hub.docker.com/v2/repositories/urfin78/mqtt2prometheus-i386/tags/"|grep -Po "$VERSION")
-        echo "::set-env name=AVAIL::$RELEASE_AVAIL"
+        echo "AVAIL=$RELEASE_AVAIL"  >> ${GITHUB_ENV}
       if: success()
 
     - name: Build the Docker image for new version

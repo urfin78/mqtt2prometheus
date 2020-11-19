@@ -30,7 +30,7 @@ jobs:
     - name: Get latest release
       run: |
         export RELEASE_LATEST=$(curl -s "https://api.github.com/repos/hikhvar/mqtt2prometheus/releases/latest" | grep -Po '"tag_name": "\K.*?(?=")')
-        echo "::set-env name=VERSION::$RELEASE_LATEST"
+        echo "VERSION=$RELEASE_LATEST" >> ${GITHUB_ENV}
       shell: bash
 
     - name: Build the Docker image for last available version
