@@ -1,4 +1,4 @@
-FROM i386/golang:1.15.5-buster as gobuild
+FROM i386/golang:1.15.6-buster as gobuild
 ARG VERSION
 WORKDIR ${GOPATH}/src/github.com/hikhvar
 RUN git clone https://github.com/hikhvar/mqtt2prometheus.git
